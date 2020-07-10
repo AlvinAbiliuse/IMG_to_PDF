@@ -1,4 +1,3 @@
-import imghdr
 import os
 from natsort import natsorted
 import send2trash
@@ -11,8 +10,8 @@ def extractFiles():
 	for manga in os.listdir('./Convert'):
 		if manga.endswith('.zip'):
 			os.makedirs('./Convert/%s' % manga.split('.')[0])
-			zipfile.ZipFile('./Convert/%s' % manga, 'r').extractall('./Convert/%s' % manga.split('.')[0])
 			print('Extracting %s...' % manga.split('.')[0])
+			zipfile.ZipFile('./Convert/%s' % manga, 'r').extractall('./Convert/%s' % manga.split('.')[0])
 			send2trash.send2trash('./Convert/%s' % manga)
 
 def writePDF():
@@ -29,13 +28,13 @@ def writePDF():
 			finalList = []
 			# Looping Images
 			for pages in Pages:
-				if imghdr.what('./Convert/%s/%s' % (manga, pages)) == None:
-					pass
-				else:
+				try:
 					fileBase = pages.split('.')[0]
 					image = Image.open('./Convert/%s/%s' % (manga, pages))
 					pages = image.convert('RGB')
 					finalList.append(pages)
+				except:
+					pass
 			finalList[0].save('./Converted/%s.pdf' % manga, save_all=True, append_images=finalList[1:])
 			send2trash.send2trash('./Convert/%s' % manga)
 		else:
