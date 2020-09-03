@@ -39,5 +39,7 @@ def writePDF():
 			send2trash.send2trash('./Convert/%s' % manga)
 		else:
 			print('%s is not a Zip File or Directory.' % manga)
-extractFiles()
-writePDF()
+
+if __name__ == "__main__":
+	extractFiles()
+	writePDF()
