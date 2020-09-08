@@ -9,9 +9,8 @@ def extractFiles():
 	# Extracts the zip file into current directory 
 	for manga in os.listdir('./Convert'):
 		if manga.endswith('.zip'):
-			os.makedirs('./Convert/%s' % manga.split('.')[0])
-			print('Extracting %s...' % manga.split('.')[0])
-			zipfile.ZipFile('./Convert/%s' % manga, 'r').extractall('./Convert/%s' % manga.split('.')[0])
+			print('Extracting %s...' % '.'.join(manga.split('.')[:-1]))
+			zipfile.ZipFile('./Convert/%s' % manga, 'r').extractall('./Convert/%s' % ('.'.join(manga.split('.')[:-1])))
 			send2trash.send2trash('./Convert/%s' % manga)
 
 def writePDF():
@@ -31,8 +30,8 @@ def writePDF():
 				try:
 					fileBase = '.'.join(pages.split('.')[:-1])
 					image = Image.open('./Convert/%s/%s' % (manga, pages))
-					pages = image.convert('RGB')
-					finalList.append(pages)
+					cPages = image.convert('RGB')
+					finalList.append(cPages)
 				except:
 					pass
 			finalList[0].save('./Converted/%s.pdf' % manga, save_all=True, append_images=finalList[1:])
