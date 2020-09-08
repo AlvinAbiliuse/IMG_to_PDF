@@ -29,7 +29,7 @@ def writePDF():
 			# Looping Images
 			for pages in Pages:
 				try:
-					fileBase = pages.split('.')[0]
+					fileBase = '.'.join(pages.split('.')[:-1])
 					image = Image.open('./Convert/%s/%s' % (manga, pages))
 					pages = image.convert('RGB')
 					finalList.append(pages)
