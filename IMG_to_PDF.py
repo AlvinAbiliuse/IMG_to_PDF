@@ -15,6 +15,10 @@ def extractFiles():
 				'./Convert/%s' % ('.'.join(manga.split('.')[:-1])))
 			send2trash.send2trash('./Convert/%s' % manga)
 
+
+
+# Loops through all the pages in the folder and creates a PIL object
+# for each and then creates multiple files with ~5 pages per pdf.
 def writePDF():
 
 	# Looping Folders
@@ -40,7 +44,8 @@ def writePDF():
 				except:
 					pass
 
-
+				# if statement to make sure that the program saves the last few
+				# pages even if number variable is not 5
 				if pages == Pages[-1]:
 					chunkNum += 1
 					if len(finalList) > 1:
@@ -53,7 +58,8 @@ def writePDF():
 				else:
 					pass
 
-
+				# creates pdf with 5 pages with the name prefixed with the checkNum
+				# number
 				if number != 5:
 					pass
 				else:
@@ -68,7 +74,7 @@ def writePDF():
 		send2trash.send2trash('./Convert/%s' % manga)
 		mergeFiles(manga, chunkNum)
 
-
+# merges the multiple pdf chunks created with writePDF() to ./Converted
 def mergeFiles(manga, number):
 	mergeObject = PyPDF2.PdfFileMerger()
 
