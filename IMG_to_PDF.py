@@ -3,6 +3,7 @@ from natsort import natsorted
 import send2trash
 from PIL import Image
 import zipfile
+import PyPDF2
 
 def extractFiles():
 
@@ -44,7 +45,7 @@ def writePDF():
 					chunkNum += 1
 					print('\n\n')
 					# print(finalList)
-					finalList[0].save('./Convert/%s.%s.pdf' % (chunkNum, manga), 
+					finalList[0].save('./Convert/%s--%s.pdf' % (chunkNum, manga), 
 						save_all=True, append_images=finalList[1:])
 					finalList = []
 					number = 0
@@ -52,15 +53,22 @@ def writePDF():
 					print('\n\n')
 					chunkNum += 1
                     # print(finalList)
-					finalList[0].save('./Convert/%s.%s.pdf' % (chunkNum, manga),
+					finalList[0].save('./Convert/%s--%s.pdf' % (chunkNum, manga),
 						save_all=True, append_images=finalList[1:])
 					finalList = []
 					number = 0
-					
 			# send2trash.send2trash('./Convert/%s' % manga)
 		else:
 			print('%s is not a Zip File or Directory.' % manga)
+		mergeFiles(manga, chunkNum)
 
+def mergeFiles(manga, number):
+	mergeObject = PyPDF2.PdfFileMerger()
+	for i in range(number):
+		mergeObject.append(PyPDF2.PdfFileReader('./Convert/%s--%s.pdf' % (i+1, manga), 'rb'))
+		send2trash.send2trash('./Convert/%s--%s.pdf' % (i+1, manga))
+	mergeObject.write('./Converted/%s.pdf' % manga)
+	# openFile = open('./Converted/%s.pdf', % manga, 'wb')
 
 if __name__ == "__main__":
 	extractFiles()
