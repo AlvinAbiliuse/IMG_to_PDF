@@ -16,7 +16,7 @@ def extractFiles():
 			send2trash.send2trash('./Convert/%s' % manga)
 
 def writePDF():
-	global finalList
+
 	# Looping Folders
 	for manga in os.listdir('./Convert'):
 		if os.path.isdir('./Convert/%s' % manga):
@@ -28,10 +28,10 @@ def writePDF():
 			number = 0
 			chunkNum = 0
 			# Looping Images
-			print(Pages)
+
+
 			for pages in Pages:
 				try:
-					print(pages)
 					image = Image.open('./Convert/%s/%s' % 
 									(manga, pages))
 					cPages = image.convert('RGB')
@@ -39,36 +39,43 @@ def writePDF():
 					number += 1
 				except:
 					pass
+
+
+				if pages == Pages[-1]:
+					chunkNum += 1
+					if len(finalList) > 1:
+						finalList[0].save('./Convert/%s.%s.pdf' % (chunkNum, manga),
+										save_all=True, append_images=finalList[1:])
+					else:
+						finalList[0].save('./Convert/%s.%s.pdf' % (chunkNum, manga))
+					finalList = []
+					number = 0
+				else:
+					pass
+
+
 				if number != 5:
 					pass
 				else:
 					chunkNum += 1
-					print('\n\n')
-					# print(finalList)
-					finalList[0].save('./Convert/%s--%s.pdf' % (chunkNum, manga), 
-						save_all=True, append_images=finalList[1:])
+					finalList[0].save('./Convert/%s.%s.pdf' % (chunkNum, manga), 
+								save_all=True, append_images=finalList[1:])
 					finalList = []
 					number = 0
-				if pages == Pages[-1]:
-					print('\n\n')
-					chunkNum += 1
-                    # print(finalList)
-					finalList[0].save('./Convert/%s--%s.pdf' % (chunkNum, manga),
-						save_all=True, append_images=finalList[1:])
-					finalList = []
-					number = 0
-			# send2trash.send2trash('./Convert/%s' % manga)
+
 		else:
 			print('%s is not a Zip File or Directory.' % manga)
+		send2trash.send2trash('./Convert/%s' % manga)
 		mergeFiles(manga, chunkNum)
+
 
 def mergeFiles(manga, number):
 	mergeObject = PyPDF2.PdfFileMerger()
+
 	for i in range(number):
-		mergeObject.append(PyPDF2.PdfFileReader('./Convert/%s--%s.pdf' % (i+1, manga), 'rb'))
-		send2trash.send2trash('./Convert/%s--%s.pdf' % (i+1, manga))
+		mergeObject.append(PyPDF2.PdfFileReader('./Convert/%s.%s.pdf' % (i+1, manga), 'rb'))
+		send2trash.send2trash('./Convert/%s.%s.pdf' % (i+1, manga))
 	mergeObject.write('./Converted/%s.pdf' % manga)
-	# openFile = open('./Converted/%s.pdf', % manga, 'wb')
 
 if __name__ == "__main__":
 	extractFiles()
