@@ -87,7 +87,7 @@ def mergeFiles(path, destination,  manga, number):
 	mergeObject.write('%s/%s.pdf' % (destination, manga))
 
 def convertMultipleFiles(path, destination):
-	print(1)
+
 	for folders in os.listdir(path):
 		multiFile = 0
 		if os.path.isdir('%s/%s' % (path, folders)):
