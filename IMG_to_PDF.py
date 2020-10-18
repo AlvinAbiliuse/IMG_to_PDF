@@ -5,6 +5,8 @@ from PIL import Image
 import zipfile
 import PyPDF2
 
+# TODO: fix indexError when converting multiple files in a folder
+
 def extractFiles(path):
 
 	# Extracts the zip file into current directory 
@@ -20,9 +22,12 @@ def extractFiles(path):
 # Loops through all the pages in the folder and creates a PIL object
 # for each and then creates multiple files with ~5 pages per pdf.
 def writePDF(path, destination):
+	print(path)
+	print(destination)
 
 	# Looping Folders
 	for manga in os.listdir(path):
+
 		if os.path.isdir('./%s/%s' % (path, manga)):
 			print('Converting %s...' % manga)
 			# All the pages except the first page needs to be added to 
@@ -32,7 +37,8 @@ def writePDF(path, destination):
 			number = 0
 			chunkNum = 0
 			# Looping Images
-
+			
+			print(finalList)
 
 			for pages in Pages:
 				try:
@@ -81,9 +87,30 @@ def mergeFiles(path, destination,  manga, number):
 	for i in range(number):
 		mergeObject.append(PyPDF2.PdfFileReader('./%s/%s.%s.pdf' % (path, i+1, manga), 'rb'))
 		send2trash.send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
-	mergeObject.write('./Converted/%s.pdf' % manga)
+	mergeObject.write('%s/%s.pdf' % (destination, manga))
 
+def convertMultipleFiles(path, destination):
+	for folders in os.listdir(path):
+		multiFile = 0
+		if os.path.isdir('%s/%s' % (path, folders)):
+			for files in os.listdir('%s/%s' % (path, folders)):
+				if files.endswith('.zip'):
+					multiFile = 1
+				elif os.path.isdir('./%s/%s/%s' % (path, folders, files)):
+					multiFile = 1
+			print('')
+			if multiFile == 1:
+				extractFiles('%s/%s' % (path, folders))
+				try:
+					os.mkdir('%s/%s' % (destination, folders)) 
+				except FileExistsError:
+					pass
+				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
+				send2trash.send2trash('%s/%s' % (path, folders))
+				multiFile = 0
+
+	
 if __name__ == "__main__":
+	convertMultipleFiles('./Convert', './Converted')
 	extractFiles('./Convert')
 	writePDF('./Convert', './Converted')
-
