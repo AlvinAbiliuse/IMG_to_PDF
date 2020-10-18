@@ -5,8 +5,6 @@ from PIL import Image
 import zipfile
 import PyPDF2
 
-# TODO: fix indexError when converting multiple files in a folder
-
 def extractFiles(path):
 
 	# Extracts the zip file into current directory 
@@ -38,9 +36,9 @@ def writePDF(path, destination):
 			chunkNum = 0
 			# Looping Images
 			
-			print(finalList)
-
 			for pages in Pages:
+				if pages.endswith('.json'):
+					continue
 				try:
 					image = Image.open('./%s/%s/%s' % 
 									(path, manga, pages))
@@ -49,7 +47,6 @@ def writePDF(path, destination):
 					number += 1
 				except:
 					pass
-
 				# if statement to make sure that the program saves the last few
 				# pages even if number variable is not 5
 				if pages == Pages[-1]:
@@ -90,6 +87,7 @@ def mergeFiles(path, destination,  manga, number):
 	mergeObject.write('%s/%s.pdf' % (destination, manga))
 
 def convertMultipleFiles(path, destination):
+	print(1)
 	for folders in os.listdir(path):
 		multiFile = 0
 		if os.path.isdir('%s/%s' % (path, folders)):
@@ -100,6 +98,7 @@ def convertMultipleFiles(path, destination):
 					multiFile = 1
 			print('')
 			if multiFile == 1:
+				print('Working on %s: ' % folders)
 				extractFiles('%s/%s' % (path, folders))
 				try:
 					os.mkdir('%s/%s' % (destination, folders)) 
