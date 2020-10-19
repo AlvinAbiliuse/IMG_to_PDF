@@ -20,8 +20,6 @@ def extractFiles(path):
 # Loops through all the pages in the folder and creates a PIL object
 # for each and then creates multiple files with ~5 pages per pdf.
 def writePDF(path, destination):
-	print(path)
-	print(destination)
 
 	# Looping Folders
 	for manga in os.listdir(path):
