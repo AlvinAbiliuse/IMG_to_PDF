@@ -98,7 +98,7 @@ def convertMultipleFiles(path, destination):
 			if multiFile == 1:
 				print('Working on %s: ' % folders)
 				extractFiles('%s/%s' % (path, folders))
-				os.mkdir('%s/%s' % (destination, folders), exists_ok=True) 
+				os.mkdir('%s/%s' % (destination, folders), exist_ok=True) 
 				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
 				send2trash.send2trash('%s/%s' % (path, folders))
 				multiFile = 0
@@ -106,7 +106,7 @@ def convertMultipleFiles(path, destination):
 
 	
 if __name__ == "__main__":
-	os.makedirs('./Converted', exists_ok=True)
+	os.makedirs('./Converted', exist_ok=True)
 	convertMultipleFiles('./Convert', './Converted')
 	extractFiles('./Convert')
 	writePDF('./Convert', './Converted')
