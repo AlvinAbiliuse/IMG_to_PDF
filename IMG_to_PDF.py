@@ -102,6 +102,7 @@ def convertMultipleFiles(path, destination):
 				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
 				send2trash.send2trash('%s/%s' % (path, folders))
 				multiFile = 0
+				print('')
 
 	
 if __name__ == "__main__":
