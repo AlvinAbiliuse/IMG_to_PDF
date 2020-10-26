@@ -94,8 +94,8 @@ def convertMultipleFiles(path, destination):
 					multiFile = 1
 				elif os.path.isdir('./%s/%s/%s' % (path, folders, files)):
 					multiFile = 1
-			print('')
 			if multiFile == 1:
+				print('')
 				print('Working on %s: ' % folders)
 				extractFiles('%s/%s' % (path, folders))
 				os.mkdir('%s/%s' % (destination, folders), exist_ok=True) 
