@@ -98,7 +98,7 @@ def convertMultipleFiles(path, destination):
 				print('')
 				print('Working on %s: ' % folders)
 				extractFiles('%s/%s' % (path, folders))
-				os.mkdir('%s/%s' % (destination, folders), exist_ok=True) 
+				os.makedirs('%s/%s' % (destination, folders), exist_ok=True) 
 				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
 				send2trash.send2trash('%s/%s' % (path, folders))
 				multiFile = 0
