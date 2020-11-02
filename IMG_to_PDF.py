@@ -1,9 +1,13 @@
+#! /usr/bin/python3
+# IMG_to_PDF.py - extracts zip files and converts images to pdf
+
 import os
 from natsort import natsorted
 import send2trash
 from PIL import Image
 import zipfile
 import PyPDF2
+from sys import argv, exit
 
 def extractFiles(path):
 
@@ -86,6 +90,8 @@ def mergeFiles(path, destination,  manga, number):
 
 def convertMultipleFiles(path, destination):
 
+	# checks if files inside folder in path is a zip file or a folder
+	# and sets multiFIle to 1 if it is.
 	for folders in os.listdir(path):
 		multiFile = 0
 		if os.path.isdir('%s/%s' % (path, folders)):
@@ -94,6 +100,8 @@ def convertMultipleFiles(path, destination):
 					multiFile = 1
 				elif os.path.isdir('./%s/%s/%s' % (path, folders, files)):
 					multiFile = 1
+			# if multifile is 1, the funtion extracts and converts
+			# files and moves it to appropriate folder after mkdir
 			if multiFile == 1:
 				print('')
 				print('Working on %s: ' % folders)
@@ -106,7 +114,15 @@ def convertMultipleFiles(path, destination):
 
 	
 if __name__ == "__main__":
+	# exits program if entered ergument is not a folder path
+	if len(argv) < 2:
+		print('Usage: ./IMG_to_PDF.py path')
+		exit()
+	# exits program if entered argument is not a folder
+	if os.isdir(argv[1]) != True:
+		print(str(argv[1]) + ' is not a folder!')
+		exit()
 	os.makedirs('./Converted', exist_ok=True)
-	convertMultipleFiles('./Convert', './Converted')
-	extractFiles('./Convert')
-	writePDF('./Convert', './Converted')
+	convertMultipleFiles(str(argv[1], './Converted')
+	extractFiles(str(argv[1]))
+	writePDF(str(argv[1]), './Converted')
