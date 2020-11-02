@@ -105,7 +105,10 @@ def convertMultipleFiles(path, destination):
 			if multiFile == 1:
 				print('')
 				print('Working on %s: ' % folders)
-				extractFiles('%s/%s' % (path, folders))
+				try:
+					extractFiles('%s/%s' % (path, folders))
+				except IsADirectoryError:
+					pass
 				os.makedirs('%s/%s' % (destination, folders), exist_ok=True) 
 				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
 				send2trash.send2trash('%s/%s' % (path, folders))
