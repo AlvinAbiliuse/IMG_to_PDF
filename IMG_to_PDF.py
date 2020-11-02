@@ -3,7 +3,7 @@
 
 import os
 from natsort import natsorted
-import send2trash
+from send2trash import send2trash
 from PIL import Image
 import zipfile
 import PyPDF2
@@ -17,7 +17,7 @@ def extractFiles(path):
 			print('Extracting %s...' % '.'.join(manga.split('.')[:-1]))
 			zipfile.ZipFile('./%s/%s' % (path, manga), 'r').extractall(
 				'./%s/%s' % (path, ('.'.join(manga.split('.')[:-1]))))
-			send2trash.send2trash('./%s/%s' % (path, manga))
+			send2trash('./%s/%s' % (path, manga))
 
 
 
@@ -76,7 +76,7 @@ def writePDF(path, destination):
 
 		else:
 			print('%s is not a Zip File or Directory.' % manga)
-		send2trash.send2trash('./%s/%s' % (path, manga))
+		send2trash('./%s/%s' % (path, manga))
 		mergeFiles(path, destination, manga, chunkNum)
 
 # merges the multiple pdf chunks created with writePDF() to ./Converted
@@ -85,7 +85,7 @@ def mergeFiles(path, destination,  manga, number):
 
 	for i in range(number):
 		mergeObject.append(PyPDF2.PdfFileReader('./%s/%s.%s.pdf' % (path, i+1, manga), 'rb'))
-		send2trash.send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
+		send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
 	mergeObject.write('%s/%s.pdf' % (destination, manga))
 
 def convertMultipleFiles(path, destination):
@@ -111,7 +111,7 @@ def convertMultipleFiles(path, destination):
 					pass
 				os.makedirs('%s/%s' % (destination, folders), exist_ok=True) 
 				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
-				send2trash.send2trash('%s/%s' % (path, folders))
+				send2trash('%s/%s' % (path, folders))
 				multiFile = 0
 				print('')
 
