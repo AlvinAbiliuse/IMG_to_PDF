@@ -17,7 +17,7 @@ def extractFiles(path):
 			print('Extracting %s...' % '.'.join(manga.split('.')[:-1]))
 			zipfile.ZipFile('./%s/%s' % (path, manga), 'r').extractall(
 				'./%s/%s' % (path, ('.'.join(manga.split('.')[:-1]))))
-#			send2trash('./%s/%s' % (path, manga))
+			send2trash('./%s/%s' % (path, manga))
 
 
 
@@ -39,16 +39,13 @@ def writePDF(path, destination):
 			# Looping Images
 			
 			for pages in Pages:
-				print(pages)
-				if pages.endswith('.json'):
-					continue
 				try:
 					image = Image.open('./%s/%s/%s' % 
 									(path, manga, pages))
 					cPages = image.convert('RGB')
 					finalList.append(cPages)
 					number += 1
-				except:
+				except Exception:
 					pass
 				# if statement to make sure that the program saves the last few
 				# pages even if number variable is not 5
@@ -74,11 +71,12 @@ def writePDF(path, destination):
 								save_all=True, append_images=finalList[1:])
 					finalList = []
 					number = 0
-				mergeFiles(path, destination, manga, chunkNum)
+			mergeFiles(path, destination, manga, chunkNum)
+			send2trash('./%s/%s' % (path, manga))
+
 		else:
 			print('%s is not a Zip File or Directory.' % manga)
 			pass
-#		send2trash('./%s/%s' % (path, manga))
 
 # merges the multiple pdf chunks created with writePDF() to ./Converted
 def mergeFiles(path, destination,  manga, number):
@@ -86,7 +84,7 @@ def mergeFiles(path, destination,  manga, number):
 
 	for i in range(number):
 		mergeObject.append(PyPDF2.PdfFileReader('./%s/%s.%s.pdf' % (path, i+1, manga), 'rb'))
-#		send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
+		send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
 	mergeObject.write('%s/%s.pdf' % (destination, manga))
 
 def convertMultipleFiles(path, destination):
