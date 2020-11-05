@@ -15,8 +15,9 @@ def extractFiles(path):
 	for manga in os.listdir(path):
 		if manga.endswith('.zip'):
 			print('Extracting %s...' % '.'.join(manga.split('.')[:-1]))
-			zipfile.ZipFile('./%s/%s' % (path, manga), 'r').extractall(
-				'./%s/%s' % (path, ('.'.join(manga.split('.')[:-1]))))
+			zipfile.ZipFile('./%s/%s' % 
+							(path, manga), 'r').extractall('./%s/%s' % 
+							(path, ('.'.join(manga.split('.')[:-1]))))
 			send2trash('./%s/%s' % (path, manga))
 
 
@@ -32,12 +33,19 @@ def writePDF(path, destination):
 			print('Converting %s...' % manga)
 			# All the pages except the first page needs to be added to 
 			# a list to be set to append pages when saving
+			for i in os.listdir('./%s/%s' % (path, manga)):
+				if i.endswith('.json'):
+					send2trash('./%s/%s/%s' % (path, manga, i))
 			Pages = natsorted(os.listdir('./%s/%s' % (path, manga)))
 			finalList = []
 			number = 0
 			chunkNum = 0
 			# Looping Images
-			
+#			for pages in Pages:
+#				if pages.endswith('.json'):
+#					send2trash('./%s/%s/%s' % (path, manga, pages))
+#					number+=1
+#					continue
 			for pages in Pages:
 				try:
 					image = Image.open('./%s/%s/%s' % 
@@ -46,29 +54,34 @@ def writePDF(path, destination):
 					finalList.append(cPages)
 					number += 1
 				except Exception:
-					pass
-				# if statement to make sure that the program saves the last few
-				# pages even if number variable is not 5
+					print('Error: ' + str(Exception))
+				# if statement to make sure that the program saves
+				# the last few pages even if number variable is not 5
 				if pages == Pages[-1]:
 					chunkNum += 1
 					if len(finalList) > 1:
-						finalList[0].save('./%s/%s.%s.pdf' % (path, chunkNum, manga),
-										save_all=True, append_images=finalList[1:])
+						finalList[0].save('./%s/%s.%s.pdf' % 
+											(path, chunkNum, manga),
+											save_all=True, 
+											append_images=finalList[1:])
 					else:
-						finalList[0].save('./%s/%s.%s.pdf' % (path, chunkNum, manga))
+						finalList[0].save('./%s/%s.%s.pdf' % 
+											(path, chunkNum, manga))
 					finalList = []
 					number = 0
 				else:
 					pass
 
-				# creates pdf with 5 pages with the name prefixed with the checkNum
-				# number
+				# creates pdf with 5 pages with the name prefixed with 
+				# the checkNum number
 				if number != 5:
 					pass
 				else:
 					chunkNum += 1
-					finalList[0].save('./%s/%s.%s.pdf' % (path, chunkNum, manga), 
-								save_all=True, append_images=finalList[1:])
+					finalList[0].save('./%s/%s.%s.pdf' % 
+										(path, chunkNum, manga), 
+										save_all=True, 
+										append_images=finalList[1:])
 					finalList = []
 					number = 0
 			mergeFiles(path, destination, manga, chunkNum)
@@ -83,7 +96,8 @@ def mergeFiles(path, destination,  manga, number):
 	mergeObject = PyPDF2.PdfFileMerger()
 
 	for i in range(number):
-		mergeObject.append(PyPDF2.PdfFileReader('./%s/%s.%s.pdf' % (path, i+1, manga), 'rb'))
+		mergeObject.append(PyPDF2.PdfFileReader('./%s/%s.%s.pdf' % 
+											(path, i+1, manga), 'rb'))
 		send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
 	mergeObject.write('%s/%s.pdf' % (destination, manga))
 
@@ -97,7 +111,8 @@ def convertMultipleFiles(path, destination):
 			for files in os.listdir('%s/%s' % (path, folders)):
 				if files.endswith('.zip'):
 					multiFile = 1
-				elif os.path.isdir('./%s/%s/%s' % (path, folders, files)):
+				elif os.path.isdir('./%s/%s/%s' % 
+									(path, folders, files)):
 					multiFile = 1
 			# if multifile is 1, the funtion extracts and converts
 			# files and moves it to appropriate folder after mkdir
@@ -108,8 +123,10 @@ def convertMultipleFiles(path, destination):
 					extractFiles('%s/%s' % (path, folders))
 				except IsADirectoryError:
 					pass
-				os.makedirs('%s/%s' % (destination, folders), exist_ok=True) 
-				writePDF('%s/%s' % (path, folders), '%s/%s' % (destination, folders))
+				os.makedirs('%s/%s' % (destination, folders), 
+							exist_ok=True) 
+				writePDF('%s/%s' % (path, folders), '%s/%s' % 
+												(destination, folders))
 				send2trash('%s/%s' % (path, folders))
 				multiFile = 0
 				print('')
