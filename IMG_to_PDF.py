@@ -41,11 +41,6 @@ def writePDF(path, destination):
 			number = 0
 			chunkNum = 0
 			# Looping Images
-#			for pages in Pages:
-#				if pages.endswith('.json'):
-#					send2trash('./%s/%s/%s' % (path, manga, pages))
-#					number+=1
-#					continue
 			for pages in Pages:
 				try:
 					image = Image.open('./%s/%s/%s' % 
