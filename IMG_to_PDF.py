@@ -9,7 +9,7 @@
 #import PyPDF2
 #import sys
 
-from dependancies import *
+from dependence import *
 import extractFiles
 
 # def extractFiles(path):
