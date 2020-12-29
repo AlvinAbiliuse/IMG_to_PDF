@@ -1,4 +1,4 @@
-from dependencies import *
+from dependence import *
 
 def extractFiles(path):
 
