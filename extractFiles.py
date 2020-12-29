@@ -1,3 +1,5 @@
+from dependencies import *
+
 def extractFiles(path):
 
     # Extracts the zip file into current directory 
