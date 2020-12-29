@@ -2,7 +2,7 @@
 
 Extracts zip files and converts numbered images into PDF files
 
-USAGE: ./IMG_to_pdf.py {path}
+USAGE: ./IMG_to_pdf.py path
 
 **Prerequisites**
 
