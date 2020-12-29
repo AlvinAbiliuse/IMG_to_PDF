@@ -1,29 +1,8 @@
 #! /usr/bin/python3
 # IMG_to_PDF.py - extracts zip files and converts images to pdf
 
-#import os
-#from natsort import natsorted
-#from send2trash import send2trash
-#from PIL import Image
-#import zipfile
-#import PyPDF2
-#import sys
-
 from dependence import *
 import extractFiles
-
-# def extractFiles(path):
-#
-#	# Extracts the zip file into current directory 
-#	for manga in os.listdir(path):
-#		if manga.endswith('.zip'):
-#			print('Extracting %s...' % '.'.join(manga.split('.')[:-1]))
-#			zipfile.ZipFile('./%s/%s' % 
-#							(path, manga), 'r').extractall('./%s/%s' % 
-#							(path, ('.'.join(manga.split('.')[:-1]))))
-#			send2trash('./%s/%s' % (path, manga))
-
-
 
 # Loops through all the pages in the folder and creates a PIL object
 # for each and then creates multiple files with ~5 pages per pdf.
