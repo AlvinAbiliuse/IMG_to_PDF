@@ -1,4 +1,4 @@
-# IMG_to_PDF 
+# IMG_to_PDF.py
 
 Extracts zip files and converts numbered images into PDF files
 
