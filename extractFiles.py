@@ -9,4 +9,5 @@ def extractFiles(path):
 					zipfile.ZipFile('./%s/%s' %
 					(path, manga), 'r').extractall('./%s/%s' %
 					(path, ('.'.join(manga.split('.')[:-1]))))
+			# deletes the zip files after extracting
 			send2trash('./%s/%s' % (path, manga))

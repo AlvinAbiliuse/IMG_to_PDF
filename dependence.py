@@ -1,3 +1,5 @@
+# dependencies for IMG_to_PDF
+
 import os
 from natsort import natsorted
 from send2trash import send2trash
