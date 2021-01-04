@@ -5,4 +5,3 @@ from PIL import Image
 import zipfile
 import PyPDF2
 import sys
-
