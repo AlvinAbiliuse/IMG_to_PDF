@@ -13,7 +13,7 @@ def writePDF(path, destination):
 			# All the pages except the first page needs to be added to 
 			# a list to be set to append pages when saving
 			for i in os.listdir('./%s/%s' % (path, manga)):
-				if i.endswith('.json'):
+				if i.split('.')[-1] in ['json', 'txt']:
 					send2trash('./%s/%s/%s' % (path, manga, i))
 			Pages = natsorted(os.listdir('./%s/%s' % (path, manga)))
 			finalList = []
