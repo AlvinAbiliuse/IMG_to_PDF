@@ -7,5 +7,5 @@ def mergeFiles(path, destination,  manga, number):
 	for i in range(number):
 		mergeObject.append(PyPDF2.PdfFileReader('./%s/%s.%s.pdf' %
 							(path, i+1, manga), 'rb'))
-		send2trash('./%s/%s.%s.pdf' % (path, i+1, manga))
+		os.remove('./%s/%s.%s.pdf' % (path, i+1, manga))
 	mergeObject.write('%s/%s.pdf' % (destination, manga))
