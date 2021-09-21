@@ -9,15 +9,18 @@ def splitImages(filename):
 	newHeight = im.height / 20
 	
 	total = 0
-	for i in range(1, 21):
-		if i == 20:
+	n = 1
+	while True:
+		if (im.height - total) < 1500:
 			newImage = im.crop((0, total, im.width,  im.height))
-			newImage.save(f'{filename}-20.jpg')
+			newImage.save(f'{filename}-{n}.jpg')
+			break
 		else:
 			newMaxHeight = total + newHeight
-			newImage = im.crop((0, total, im.width,  newMaxHeight))
-			total += newHeight
-			newImage.save(f'{filename}-{i}.jpg')
+			newImage = im.crop((0, total, im.width,  total + 1500))
+			total += 1500
+			newImage.save(f'{filename}-{n}.jpg')
+			n += 1
 
 
 for i in os.listdir():
