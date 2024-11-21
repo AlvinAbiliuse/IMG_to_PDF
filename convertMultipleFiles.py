@@ -4,7 +4,8 @@ from extractFiles import *
 
 def convertMultipleFiles(path, destination):
 	# checks if files inside folder in path is a zip file or a folder
-	# and sets multiFIle to 1 if it is.
+	# and sets multiFile to 1 if it is and then calls the function
+	# again with new path and destination.
 	for folders in os.listdir(path):
 		multiFile = 0
 		if os.path.isdir('%s/%s' % (path, folders)):
@@ -14,7 +15,7 @@ def convertMultipleFiles(path, destination):
 				elif os.path.isdir('./%s/%s/%s' %
 									(path, folders, files)):
 					multiFile = 1
-			# if multifile is 1, the funtion extracts and converts
+			# if multifile is 1, the function extracts and converts
 			# files and moves it to appropriate folder after mkdir
 			if multiFile == 1:
 				print('\nWorking on %s: ' % folders)

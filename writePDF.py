@@ -12,9 +12,12 @@ def writePDF(path, destination):
 			print('Converting %s...' % manga)
 			# All the pages except the first page needs to be added to 
 			# a list to be set to append pages when saving
+			#converts webp pages to jpg
 			for i in os.listdir('./%s/%s' % (path, manga)):
-				if i.split('.')[-1] in ['json', 'txt']:
-					send2trash('./%s/%s/%s' % (path, manga, i))
+				if i.split('.')[-1] == "webp":
+					im = Image.open(f'./{path}/{manga}/{i}').convert("RGB")
+					im.save(f"./{path}/{manga}/{i}.jpg")
+					send2trash(f"./{path}/{manga}/{i}")
 			Pages = natsorted(os.listdir('./%s/%s' % (path, manga)))
 			finalList = []
 			number = 0
