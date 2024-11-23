@@ -8,25 +8,24 @@ def convertMultipleFiles(path, destination):
 	# again with new path and destination.
 	for folders in os.listdir(path):
 		multiFile = 0
-		if os.path.isdir('%s/%s' % (path, folders)):
-			for files in os.listdir('%s/%s' % (path, folders)):
+		if os.path.isdir(f'{path}/{folders}'):
+			for files in os.listdir(f'{path}/{folders}'):
 				if files.endswith('.zip'):
 					multiFile = 1
-				elif os.path.isdir('./%s/%s/%s' %
-									(path, folders, files)):
+				elif os.path.isdir(f'./{path}/{folders}/{files}':
 					multiFile = 1
 			# if multifile is 1, the function extracts and converts
 			# files and moves it to appropriate folder after mkdir
 			if multiFile == 1:
-				print('\nWorking on %s: ' % folders)
+				print(f'\nWorking on {folders}: ')
 				try:
-					extractFiles('%s/%s' % (path, folders))
+					extractFiles(f'{path}/{folders}')
 				except IsADirectoryError:
 					pass
-				os.makedirs('%s/%s' % (destination, folders),
-										exist_ok=True)
-				writePDF('%s/%s' % (path, folders), '%s/%s' %
-										(destination, folders))
-				send2trash('%s/%s' % (path, folders))
+				os.makedirs(f'{destination}/{folders}',
+								exist_ok=True)
+				writePDF(f'{path}/{folders}',
+						f'{destination}/{folders}')
+				send2trash(f'{path}/{folders}')
 				multiFile = 0
 				print('')
