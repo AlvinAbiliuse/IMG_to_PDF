@@ -37,4 +37,4 @@ if __name__ == "__main__":
         if i.split(".")[-1] == "html":
             send2trash.send2trash(f"./CC/{i}")
         else:
-            checkPath(f"./CC/{i}")
+            cleanPath(f"./CC/{i}")
