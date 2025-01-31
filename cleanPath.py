@@ -10,7 +10,9 @@ def cleanPath(path):
     test = path.split("-");
     print(f"Cleaning {path} \n")
     for i in os.listdir(path):
-        if os.path.isdir(f"{path}/{i}") == True:
+        if i.split(".")[-1] == "html":
+            send2trash.send2trash(f"./CC/{i}")
+        elif os.path.isdir(f"{path}/{i}") == True:
             cleanPath(f"{path}/{i}")
         elif len(test) > 1 and test[-1] == " Asura Scans_files":
             for i in os.listdir(path):
@@ -33,8 +35,4 @@ def cleanPath(path):
                     send2trash.send2trash(f"{path}/{i}")
 
 if __name__ == "__main__":
-    for i in os.listdir("./CC"):
-        if i.split(".")[-1] == "html":
-            send2trash.send2trash(f"./CC/{i}")
-        else:
-            cleanPath(f"./CC/{i}")
+    cleanPath(f"./CC/{i}")
