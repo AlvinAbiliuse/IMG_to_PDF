@@ -21,7 +21,7 @@ def cleanPath(path):
                     send2trash.send2trash(f"{path}/{i}")
                 elif i.split(".")[-1] == "webp":
                     if len(i.split("-")[0]) > 5:
-                        send2trash.send2trash(f"{path}/{i}"
+                        send2trash.send2trash(f"{path}/{i}")
                     print(i)
                 else:
                     send2trash.send2trash(f"{path}/{i}")
