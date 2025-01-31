@@ -11,7 +11,7 @@ def cleanPath(path):
     print(f"Cleaning {path} \n")
     for i in os.listdir(path):
         if os.path.isdir(f"{path}/{i}") == True:
-            trial(f"{path}/{i}")
+            cleanPath(f"{path}/{i}")
         elif len(test) > 1 and test[-1] == " Asura Scans_files":
             for i in os.listdir(path):
                 if i == "google.webp" or i == "logo.webp":
