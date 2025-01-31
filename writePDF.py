@@ -56,9 +56,7 @@ def writePDF(path, destination):
 				else:
 					chunkNum += 1
 					finalList[0].save(
-								f'./{path}/{chunkNum}/{folders}'),
-								save_all=True,
-								append_images=finalList[1:])
+								f'./{path}/{chunkNum}/{folders}', save_all=True, append_images=finalList[1:])
 					finalList = []
 					number = 0
 			mergeFiles(path, destination, folders, chunkNum)
