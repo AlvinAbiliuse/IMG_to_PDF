@@ -9,7 +9,7 @@ path = os.listdir("./")[0]
 def cleanPath(path):
     print(path)
     test = path.split("-");
-    print("\n")
+    print(f"cleaning {path}")
     for i in os.listdir(path):
         if os.path.isdir(f"{path}/{i}") == True:
             print(f"{path}/{i}")
@@ -20,6 +20,8 @@ def cleanPath(path):
                 if i == "google.webp" or i == "logo.webp":
                     send2trash.send2trash(f"{path}/{i}")
                 elif i.split(".")[-1] == "webp":
+                    if len(i.split("-")[0]) > 5:
+                        send2trash.send2trash(f"{path}/{i}"
                     print(i)
                 else:
                     send2trash.send2trash(f"{path}/{i}")
