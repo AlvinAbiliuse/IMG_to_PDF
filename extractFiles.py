@@ -2,13 +2,12 @@ from dependence import *
 
 def extractFiles(path):
 
-    # Extracts the zip file into current directory 
-    for folders in os.listdir(path):
-        if folders.endswith('.zip'):
-            print(folders)
-            name = '.'.join(folders.split('.')[:-1    ])
-            print(f'Extracting {name}...')
-            zipfile.ZipFile(f'./{path}{folders}', 'r').extractall(
-                f'./{path}/{name}')
-            # deletes the zip files after extracting
-            send2trash(f'./{path}/{folder}')
+	# Extracts the zip file into current directory 
+	for manga in os.listdir(path):
+		if manga.endswith('.zip'):
+			print('Extracting %s...' % '.'.join(manga.split('.')[:-1]))
+			zipfile.ZipFile('./%s/%s' %
+							(path, manga), 'r').extractall('./%s/%s' %
+							(path, ('.'.join(manga.split('.')[:-1]))))
+			# deletes the zip files after extracting
+			send2trash('./%s/%s' % (path, manga))
