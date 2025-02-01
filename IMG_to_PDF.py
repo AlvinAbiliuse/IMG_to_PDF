@@ -17,7 +17,8 @@ if __name__ == "__main__":
     if os.path.isdir(sys.argv[1]) != True:
         print(sys.argv[1] + ' is not a folder!')
         sys.exit()
-    cleanPath(sys.argv[1])
+    if sys.argv[2] == "--clean" or sys.argv[2] == "-c":
+        cleanPath(sys.argv[1])
     os.makedirs('./Converted', exist_ok=True)
     convertMultipleFiles(sys.argv[1], './Converted')
     extractFiles(sys.argv[1])
