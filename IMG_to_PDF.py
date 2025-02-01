@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-# IMG_to_PDF.py - extracts zip files and converts images to pdf
+# IMG_to_PDF.py - deletes the unnecessary files, extracts zip files and converts images to pdf
 
 from extractFiles import *
 from writePDF import *
