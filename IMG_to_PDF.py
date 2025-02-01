@@ -11,11 +11,12 @@ import sys
 if __name__ == "__main__":
     # exits program if entered argument is not a folder path
     if len(sys.argv) < 2:
-        print('Usage: ./IMG_to_PDF.py path')
+        print('Usage: python3 ./IMG_to_PDF.py -c path')
         sys.exit()
     # exits program if entered argument is not a folder
     if os.path.isdir(sys.argv[-1]) != True:
         print(sys.argv[-1] + ' is not a folder!')
+        print('Usage: python3 ./IMG_to_PDF.py -c path')
         sys.exit()
     if len(sys.argv) > 2:
         if sys.argv[1] == "--clean" or sys.argv[1] == "-c":
