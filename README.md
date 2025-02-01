@@ -2,7 +2,9 @@
 
 Extracts zip files and converts numbered images into PDF files
 
-USAGE: python3 ./IMG_to_pdf.py -c path
+install requirements: pip3 install -r requirements.txt
+
+usage: python3 ./IMG_to_pdf.py -c path
 
 **Prerequisites**
 
