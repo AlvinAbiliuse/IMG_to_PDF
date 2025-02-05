@@ -8,7 +8,7 @@ from cleanPath import *
 import os
 import sys
 
-if __name__ == "__main__":
+def img_to_pdf():
     # exits program if entered argument is not a folder path
     if len(sys.argv) < 2:
         print('Usage: python3 ./IMG_to_PDF.py -c path')
@@ -25,3 +25,7 @@ if __name__ == "__main__":
     convertMultipleFiles(sys.argv[-1], './Converted')
     extractFiles(sys.argv[-1])
     writePDF(sys.argv[-1], './Converted')
+
+
+if __name__ == "__main__":
+    img_to_pdf()
