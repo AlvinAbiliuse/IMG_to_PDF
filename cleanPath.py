@@ -20,7 +20,11 @@ def cleanPath(path):
                     if i == "google.webp" or i == "logo.webp":
                         send2trash.send2trash(f"{path}/{i}")
                     elif i.split(".")[-1] == "webp":
-                        if len(i.split("-")[0]) > 5:
+                        if i.find("_") != -1:
+                            if len(i.split("_")[0]) > 5:
+                                    send2trash.send2trash(
+                                        f"{path}/{i}")
+                        elif len(i.split("-")[0]) > 5:
                             send2trash.send2trash(f"{path}/{i}")
                     else:
                         send2trash.send2trash(f"{path}/{i}")
