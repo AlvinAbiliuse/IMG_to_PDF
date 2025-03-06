@@ -30,9 +30,7 @@ def cleanPath(path):
                         send2trash.send2trash(f"{path}/{i}")
             else:
                 for i in os.listdir(path):
-                    if i.find(".webp"):
-                        continue
-                    elif i.split(".")[-1] in ["js", "css"]:
+                    if i.split(".")[-1] in ["js", "css"]:
                         send2trash.send2trash(f"{path}/{i}")
                     elif i == "logo-chap.png":
                         send2trash.send2trash(f"{path}/{i}")
