@@ -1,6 +1,9 @@
 import os
 import send2trash
 
+
+# script to delete everything except the files with numbers only
+
 path = "./CC"
 
 files = os.listdir(path)
