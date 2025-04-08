@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! ./env/bin/python3
 # IMG_to_PDF.py - deletes the unnecessary files, extracts zip files and converts images to pdf
 
 from extractFiles import *
