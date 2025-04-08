@@ -3,11 +3,15 @@
 Extracts zip files and converts numbered images into PDF files
 
 INSTRUCTONS:
+
+only required once:
 $ python3 -m venv env
 $ source env/bin/activate
 $ pip3 install -r requirements.txt
-$ ./IMG_to_PDF.py <path>
 $ deactivate
+
+then enter the command below everytime
+$ ./IMG_to_PDF.py <path>
 
 usage: python3 ./IMG_to_pdf.py -c path
 
