@@ -2,7 +2,7 @@
 
 import os
 import send2trash
-
+from "./script.py" import check
 
 path = os.listdir("./")[0]
 
@@ -29,6 +29,9 @@ def cleanPath(path):
                     else:
                         send2trash.send2trash(f"{path}/{i}")
             else:
+                check(f"{path}/{i}");
+                
+            ''' 
                 for i in os.listdir(path):
                     if i.split(".")[-1] in ["js", "css"]:
                         send2trash.send2trash(f"{path}/{i}")
@@ -38,7 +41,9 @@ def cleanPath(path):
                         continue
                     else:
                         send2trash.send2trash(f"{path}/{i}")
+
+            '''
         except OSError:
             pass
 if __name__ == "__main__":
-    cleanPath("./CC")
+    cleanPath("./ACC")
