@@ -28,11 +28,6 @@ def check(a):
                     send2trash.send2trash(f"{path}/{i}/{j}/{l}")
 
 
-
-
-
-
-
 def cleanPath(path):
     test = path.split("-");
     print(f"Cleaning {path} \n")
@@ -72,5 +67,6 @@ def cleanPath(path):
             '''
         except OSError:
             pass
+
 if __name__ == "__main__":
     cleanPath("./CC")
