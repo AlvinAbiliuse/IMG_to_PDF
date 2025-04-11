@@ -3,30 +3,27 @@
 import os
 import send2trash
 
-path = os.listdir("./")[0]
 
 
 def check(a):
     path = a
     files = os.listdir(path)
     for i in files:
-        tt = os.listdir(f"{path}/{i}")
-        for j in tt:
-            ll = os.listdir(f"{path}/{i}/{j}")
-            for l in ll:
-                check = True
-                for char in list(l.split(".")[0]):
-                    try:
-                        if type(int(char)) == int:
-                            continue
-                    except:
-                        check = False
-                        continue
-                if check == True:
+        check = True
+        for char in list(i.split(".")[0]):
+            try:
+                if type(int(char)) == int:
                     continue
-                else:
-                    send2trash.send2trash(f"{path}/{i}/{j}/{l}")
+            except:
+                check = False
+                continue
+        if i.endswith(".cbz") or i.endswith(".zip"):
+            check = True
 
+        if check == True:
+            continue
+        else:
+            send2trash.send2trash(f"{path}/{i}")
 
 def cleanPath(path):
     test = path.split("-");
@@ -51,7 +48,7 @@ def cleanPath(path):
                     else:
                         send2trash.send2trash(f"{path}/{i}")
             else:
-                check(f"{path}/{i}");
+                check(f"{path}");
                 
             ''' 
                 for i in os.listdir(path):
