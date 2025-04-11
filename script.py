@@ -10,8 +10,8 @@ path = "./CC"
 
 files = os.listdir(path)
 
-def check():
-    path = "./CC"
+def check(a):
+    path = a
     files = os.listdir(path)
     for i in files:
         tt = os.listdir(f"{path}/{i}")
