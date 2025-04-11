@@ -2,9 +2,36 @@
 
 import os
 import send2trash
-from "./script.py" import check
 
 path = os.listdir("./")[0]
+
+
+def check(a):
+    path = a
+    files = os.listdir(path)
+    for i in files:
+        tt = os.listdir(f"{path}/{i}")
+        for j in tt:
+            ll = os.listdir(f"{path}/{i}/{j}")
+            for l in ll:
+                check = True
+                for char in list(l.split(".")[0]):
+                    try:
+                        if type(int(char)) == int:
+                            continue
+                    except:
+                        check = False
+                        continue
+                if check == True:
+                    continue
+                else:
+                    send2trash.send2trash(f"{path}/{i}/{j}/{l}")
+
+
+
+
+
+
 
 def cleanPath(path):
     test = path.split("-");
@@ -46,4 +73,4 @@ def cleanPath(path):
         except OSError:
             pass
 if __name__ == "__main__":
-    cleanPath("./ACC")
+    cleanPath("./CC")
