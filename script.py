@@ -1,4 +1,4 @@
-#! ./evn/lib
+#! ./env/bin/python3
 
 import os
 import shutil
