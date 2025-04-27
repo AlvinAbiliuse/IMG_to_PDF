@@ -12,7 +12,7 @@ def convertMultipleFiles(path, destination):
         if os.path.isdir('%s/%s' % (path, folders)):
             inFiles = os.listdir('%s/%s' % (path, folders))
             inFiles.sort()
-            for files in inFIles:
+            for files in inFiles:
                 if files.endswith('.zip') or files.endswith(".cbz"):
                     multiFile = 1
                 elif os.path.isdir('./%s/%s/%s' %
