@@ -5,10 +5,14 @@ from extractFiles import *
 def convertMultipleFiles(path, destination):
 	# checks if files inside folder in path is a zip file or a folder
 	# and sets multiFIle to 1 if it is.
-	for folders in os.listdir(path):
+    curr = os.listdir(path)
+    curr.sort()
+	for folders in curr:
 		multiFile = 0
 		if os.path.isdir('%s/%s' % (path, folders)):
-			for files in os.listdir('%s/%s' % (path, folders)):
+            inFiles = os.listdir('%s/%s' % (path, folders))
+            inFiles.sort()
+            for files in inFIles:
 				if files.endswith('.zip') or files.endswith(".cbz"):
 					multiFile = 1
 				elif os.path.isdir('./%s/%s/%s' %
