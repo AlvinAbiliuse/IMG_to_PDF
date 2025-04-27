@@ -28,7 +28,9 @@ def check(a):
 def cleanPath(path):
     test = path.split("-");
     print(f"Cleaning {path} \n")
-    for i in os.listdir(path):
+    curr = os.listdir(path)
+    curr.sort()
+    for i in curr:
         try:
             if i.split(".")[-1] == "html":
                 send2trash.send2trash(f"./{path}/{i}")
