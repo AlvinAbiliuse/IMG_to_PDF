@@ -13,7 +13,7 @@ $ deactivate
 then enter the command below everytime
 $ ./IMG_to_PDF.py <path>
 
-usage: python3 ./IMG_to_pdf.py -c path
+usage: python3 ./IMG_to_pdf.py path
 
 **Prerequisites**
 
